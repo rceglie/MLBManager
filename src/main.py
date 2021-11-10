@@ -1,2 +1,6 @@
+from Player import *
+from helpers import *
 
-print("hello")
+players = createPitchers(5)
+for i in players:
+    print(i.print())
