@@ -1,6 +1,13 @@
 from Player import *
 from helpers import *
+from saveoperations import *
 
-players = createPitchers(5)
-for i in players:
-    print(i.print())
+def main():
+    startup()
+
+def do():
+    print("yes")
+
+if __name__ == "__main__":
+    main()
+

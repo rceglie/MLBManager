@@ -1,0 +1,30 @@
+Arizona,Diamondbacks,ARI,NL,west
+Atlanta,Braves,ATL,NL,east
+Baltimore,Orioles,BAL,AL,east
+Boston,Red Sox,BOS,AL,east
+Chicago,Cubs,CHC,NL,central
+Chicago,White Sox,CWS,AL,central
+Cincinnati,Reds,CIN,NL,central
+Cleveland,Indians,CLE,AL,central
+Colorado,Rockies,COL,NL,west
+Detroit,Tigers,DET,AL,central
+Houston,Astros,HOU,AL,west
+Kansas City,Royals,KC,AL,central
+Los Angeles,Angels,LAA,AL,west
+Los Angeles,Dodgers,LAD,NL,west
+Miami,Marlins,MIA,NL,east
+Milwaukee,Brewers,MIL,NL,central
+Minnesota,Twins,MIN,AL,central
+New York,Mets,NYM,NL,east
+New York,Yankees,NYY,AL,east
+Oakland,Athletics,OAK,AL,west
+Philadelphia,Phillies,PHI,NL,east
+Pittsburgh,Pirates,PIT,NL,central
+San Diego,Padres,SD,NL,west
+Seattle,Mariners,SEA,AL,west
+San Francisco,Giants,SF,NL,west
+St. Louis,Cardinals,STL,NL,central
+Tampa Bay,Rays,TB,AL,east
+Texas,Rangers,TEX,AL,west
+Toronto,Blue Jays,TOR,AL,east
+Washington,Nationals,WSH,NL,east
