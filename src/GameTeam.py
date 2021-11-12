@@ -4,4 +4,13 @@ class GameTeam:
         self.bench = []
         self.starter = 0
         self.bullpen = []
-        
+        self.one = ""
+        self.two = ""
+        self.three = ""
+        self.four = ""
+        self.five = ""
+        self.six = ""
+        self.seven = ""
+        self.eight = ""
+        self.nine = ""
+

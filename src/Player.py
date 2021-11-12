@@ -50,6 +50,14 @@ class Player:
         self.salary = sal
         self.yearsLeft = yrs
 
+    def printShort(self):
+        print(self.position, self.fName, self.lName)
+        print("Hit: \t\t", self.hit)
+        print("Pitch: \t\t", self.pitch)
+        print("Field: \t\t", self.field)
+        print("\n")
+
+
     def print(self):
         print("FName: \t\t", self.fName)
         print("LName: \t\t", self.lName)

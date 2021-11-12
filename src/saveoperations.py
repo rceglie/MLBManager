@@ -10,19 +10,10 @@ def startup():
     # checks if there is already a save
 
     if os.stat("C:\\Users\\Robert\\IdeaProjects\\MLBManager\\save\\save.txt").st_size == 0:
-        start = timeit.default_timer()
-
-        firstload()
-
-        stop = timeit.default_timer()
-        print('Time: ', stop - start)
+        return firstload()
     else:
-        start = timeit.default_timer()
+        return load()
 
-        load()
-
-        stop = timeit.default_timer()
-        print('Time: ', stop - start)
 
 def firstload():
 
@@ -111,7 +102,7 @@ def firstload():
         file.write(player.toString())
     file.close()
 
-    do()
+    return league
 
 
 def load():
@@ -151,4 +142,5 @@ def load():
         else:
             league.addFreeAgent(player)
 
-    do()
+
+    return league

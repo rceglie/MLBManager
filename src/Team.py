@@ -30,3 +30,9 @@ class Team:
         ret = ret + self.location + "," + self.name +"," + self.abb +"," + self.lg +"," + self.div
         ret = ret + "\n"
         return ret
+
+    def printDepthChart(self):
+        for pos in range(9):
+            for p in self.roster:
+                if p.position == str(pos):
+                    p.printShort()
