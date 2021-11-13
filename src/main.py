@@ -28,15 +28,10 @@ def game(le):
     game.pitcher = gt2.positions[0]
     game.batter = gt1.lineup[0]
 
-    print("Pitching:\n")
-    game.pitcher.printShort()
-    print("Batting:\n")
-    game.batter.printShort()
+    gt1.printLineup()
+    gt2.printLineup()
 
-    n = 100
-    for i in range(n):
-        game.pitch()
-        print("\n")
+    game.startGame()
 
 
 if __name__ == "__main__":
