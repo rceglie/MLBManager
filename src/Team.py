@@ -11,6 +11,10 @@ class Team:
         self.pitchers = []
         self.wins = 0
         self.losses = 0
+        self.positions = []
+        for i in range(9):
+            blank = []
+            self.positions.append(blank)
 
     def addPlayer(self, p):
         if p.position == 1:
@@ -19,6 +23,7 @@ class Team:
         else:
             self.hitters.append(p)
             self.roster.append(p)
+        self.positions[int(p.position) - 1].append(p)
         p.team = self.name
 
     def addPlayers(self, p):
@@ -27,12 +32,11 @@ class Team:
 
     def toString(self):
         ret = ""
-        ret = ret + self.location + "," + self.name +"," + self.abb +"," + self.lg +"," + self.div
+        ret = ret + self.location + "," + self.name + "," + self.abb + "," + self.lg + "," + self.div
         ret = ret + "\n"
         return ret
 
     def printDepthChart(self):
-        for pos in range(9):
-            for p in self.roster:
-                if p.position == str(pos):
-                    p.printShort()
+        for pos in self.positions:
+            for p in pos:
+                p.printShort()

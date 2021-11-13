@@ -33,7 +33,6 @@ class League:
                 elif t.div == "west":
                     self.NLWest.append(t)
 
-
     def printDivisions(self):
         for t in self.ALEast:
             print(t.name)

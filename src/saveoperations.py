@@ -5,8 +5,8 @@ from Team import *
 from main import *
 import timeit
 
-def startup():
 
+def startup():
     # checks if there is already a save
 
     if os.stat("C:\\Users\\Robert\\IdeaProjects\\MLBManager\\save\\save.txt").st_size == 0:
@@ -16,7 +16,6 @@ def startup():
 
 
 def firstload():
-
     # writes 0 in save file to write something
 
     file = open("C:\\Users\\Robert\\IdeaProjects\\MLBManager\\save\\save.txt", "w")
@@ -80,20 +79,18 @@ def firstload():
         temp.extend(createPosition(1, 7))
         temp.extend(createPosition(1, 8))
         temp.extend(createPosition(1, 9))  # 1 of each position (8)
-        temp.extend(createHitters(5))      # 5 bench hitters
-        temp.extend(createPosition(13, 1)) # 13 pitchers
+        temp.extend(createHitters(5))  # 5 bench hitters
+        temp.extend(createPosition(13, 1))  # 13 pitchers
 
         league.allTeams[i].addPlayers(temp)
         masterPlayerList.extend(temp)
 
-
     for i in range(8):
-        temp.extend(createPosition(5, i+2))   # 5 per position as free agents
+        temp.extend(createPosition(5, i + 2))  # 5 per position as free agents
     temp.extend(createPosition(50, 1))
     masterPlayerList.extend(temp)
     for t in temp:
         league.addFreeAgent(t)
-
 
     # write masterPlayerList to text file
 
@@ -106,18 +103,16 @@ def firstload():
 
 
 def load():
-
     playerString = []
     teamsString = []
     teams = []
-    masterPlayers = []
 
     with open("C:\\Users\\Robert\\IdeaProjects\\MLBManager\\save\\players.txt", "r") as file:
-        for line in file: # parse every player
+        for line in file:  # parse every player
             playerString.append(line)
         file.close()
     with open("C:\\Users\\Robert\\IdeaProjects\\MLBManager\\save\\teams.txt", "r") as file:
-        for line in file: # parse every player
+        for line in file:  # parse every player
             teamsString.append(line)
     file.close()
 
@@ -136,11 +131,10 @@ def load():
     for string in playerString:
         ps = string.split(",")
         ps[-1] = ps[-1].rstrip(ps[-1][-1])
-        player = Player(ps[0], ps[1], ps[2], ps[3], ps[4], ps[5], ps[6], ps[7], ps[8], ps[9])
+        player = Player(ps)
         if player.team != "FA":
             teams[teamNames.index(player.team)].addPlayer(player)
         else:
             league.addFreeAgent(player)
-
 
     return league
