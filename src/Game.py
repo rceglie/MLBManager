@@ -18,6 +18,28 @@ class Game:
         self.outs = 0
         self.strikes = 0
         self.balls = 0
+        self.first = 0
+        self.second = 0
+        self.third = 0
+
+    def detHitType(self):
+        # what kind of hit
+        val = .5 + ((self.pitcher.bbnine - 50) / 200)
+        hr = .16 * (self.batter.power / 50)
+        triple = .02 * (self.batter.power / 50)
+        double = .20 * (self.batter.power / 50)
+        single = 1 - (hr + triple + double)
+        print("1B: %.2f, 2B: %.2f, 3B: %.2f, HR: %.2f" % (single, double, triple, hr))
+        rand = r.randint(0, 100)
+        print(rand)
+        if rand < (hr) * 100:
+            print("hr")
+        elif rand < (hr + triple) * 100:
+            print("triple")
+        elif rand < (hr + triple + double) * 100:
+            print("double")
+        else:
+            print("single")
 
     def pitch(self):
 
@@ -56,6 +78,7 @@ class Game:
             rand = r.randint(0, 100)
             if rand < val * 100:
                 inplayornot = "in play"
+                self.detHitType()
             else:
                 inplayornot = "swing and miss"
                 self.strikes += 1
