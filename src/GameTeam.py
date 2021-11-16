@@ -30,7 +30,12 @@ class GameTeam:
         self.lineup[1] = self.lineup[2]
         self.lineup[2] = temp  # swaps 1 and 3
         self.batter = self.lineup[0]
-        self.pitcher = self.lineup[8]
+
+        self.team.setRotation()
+
+        self.pitcher = self.team.getStarter()
+
+
 
     def printLineup(self):
         print("\n\n" + self.team.name + " " + "Lineup\n\n")

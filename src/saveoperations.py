@@ -85,6 +85,7 @@ def firstload():
         league.allTeams[i].addPlayers(temp)
         masterPlayerList.extend(temp)
 
+    temp.clear()
     for i in range(8):
         temp.extend(createPosition(5, i + 2))  # 5 per position as free agents
     temp.extend(createPosition(50, 1))
@@ -93,6 +94,7 @@ def firstload():
         league.addFreeAgent(t)
 
     # write masterPlayerList to text file
+
 
     file = open("C:\\Users\\Robert\\IdeaProjects\\MLBManager\\save\\players.txt", "w")
     for player in masterPlayerList:
@@ -112,7 +114,7 @@ def load():
             playerString.append(line)
         file.close()
     with open("C:\\Users\\Robert\\IdeaProjects\\MLBManager\\save\\teams.txt", "r") as file:
-        for line in file:  # parse every player
+        for line in file:  # parse every team
             teamsString.append(line)
     file.close()
 
@@ -134,7 +136,9 @@ def load():
         player = Player(ps)
         if player.team != "FA":
             teams[teamNames.index(player.team)].addPlayer(player)
+            #league.allTeams[teamNames.index(player.team)].addPlayer(player)
         else:
             league.addFreeAgent(player)
+
 
     return league

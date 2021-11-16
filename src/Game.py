@@ -38,11 +38,6 @@ class Game:
 
     def printBoxScore(self):
         print("\n%s: %d\n%s: %d\n\n" % (self.home.name, self.hScore, self.away.name, self.aScore))
-        #print("Average Score 1: %.1f" % (self.hScore/self.games))
-        #print("Average Score 2: %.1f" % (self.aScore/self.games))
-        #print("Walks/game/team: %.1f" % (self.walks/self.games/2))
-        #print("Strike %%: %.1f%%" % (100*self.totalStrikes/self.totalPitches))
-        #print("Hits/game: %.1f" % (self.totalHits/self.games))
 
     def printScore(self):
         print("\n********* %s: %d --- %s: %d *********\n" % (self.home.name, self.hScore, self.away.name, self.aScore))
@@ -57,25 +52,25 @@ class Game:
         double = .20 * (self.batter.power / 50)
         single = 1 - (hr + triple + double)
 
-        #print("1B: %.2f, 2B: %.2f, 3B: %.2f, HR: %.2f" % (single, double, triple, hr))
+        # print("1B: %.2f, 2B: %.2f, 3B: %.2f, HR: %.2f" % (single, double, triple, hr))
         rand = r.randint(0, 100)
-        #print(rand)
+        # print(rand)
         scored = 0
 
         if rand < (hr) * 100:
 
-            print(self.batter.lName + " homered.")
+            #print(self.batter.lName + " homered.")
 
             if self.firstBase is not None:
-                print(self.firstBase.lName + " scored.")
-                self.score()    # 1st base scores
+                #print(self.firstBase.lName + " scored.")
+                self.score()  # 1st base scores
             if self.secondBase is not None:
-                print(self.secondBase.lName + " scored.")
-                self.score()    # 2nd base scores
+                #print(self.secondBase.lName + " scored.")
+                self.score()  # 2nd base scores
             if self.thirdBase is not None:
-                print(self.thirdBase.lName + " scored.")
-                self.score()    # 3rd base scores
-            self.score()    # batter scores
+                #print(self.thirdBase.lName + " scored.")
+                self.score()  # 3rd base scores
+            self.score()  # batter scores
             # empty bases
             self.firstBase = None
             self.secondBase = None
@@ -84,19 +79,19 @@ class Game:
             scored = 1
         elif rand < (hr + triple) * 100:
 
-            print("triple")
+            #print("triple")
 
             if self.firstBase is not None:
-                print(self.firstBase.lName + " scored from 1st.")
-                self.score()    # 1st base scores
+                #print(self.firstBase.lName + " scored from 1st.")
+                self.score()  # 1st base scores
                 scored = 1
             if self.secondBase is not None:
-                print(self.secondBase.lName + " scored from 2nd.")
-                self.score()    # 2nd base scores
+                #print(self.secondBase.lName + " scored from 2nd.")
+                self.score()  # 2nd base scores
                 scored = 1
             if self.thirdBase is not None:
-                print(self.thirdBase.lName + " scored from 3rd.")
-                self.score()    # 3rd base scores
+                #print(self.thirdBase.lName + " scored from 3rd.")
+                self.score()  # 3rd base scores
                 scored = 1
 
             self.firstBase = None
@@ -105,40 +100,40 @@ class Game:
 
         elif rand < (hr + triple + double) * 100:
 
-            print(self.batter.lName + " doubled.")
+            #print(self.batter.lName + " doubled.")
 
             if self.thirdBase is not None:
                 self.score()
-                print(self.thirdBase.lName + " scored from 3rd.")
+                #print(self.thirdBase.lName + " scored from 3rd.")
                 self.thirdBase = None
                 scored = 1
             if self.secondBase is not None:
                 self.score()
-                print(self.secondBase.lName + " scored from 2nd.")
+                #print(self.secondBase.lName + " scored from 2nd.")
                 self.secondBase = None
                 scored = 1
             if self.firstBase is not None:
                 rand = r.randint(0, 100)
                 if rand < self.firstBase.speed * 100:
                     self.score()
-                    print(self.firstBase.lName + " scored from 1st.")
+                    #print(self.firstBase.lName + " scored from 1st.")
                     self.firstBase = None
                     scored = 1
                 else:
                     # advance to third
                     self.thirdBase = self.firstBase
-                    print(self.firstBase.lName + " to 3rd.")
+                    #print(self.firstBase.lName + " to 3rd.")
                     self.firstBase = None
 
             self.secondBase = self.batter
 
         else:
 
-            print(self.batter.lName + " singled.")
+            #print(self.batter.lName + " singled.")
 
             if self.thirdBase is not None:
                 self.score()
-                print(self.thirdBase.lName + " scored from 3rd.")
+                #print(self.thirdBase.lName + " scored from 3rd.")
                 self.thirdBase = None
                 scored = 1
             if self.secondBase is not None:
@@ -146,43 +141,43 @@ class Game:
                 if rand < self.secondBase.speed * 100:
                     # advance to home
                     self.score()
-                    print(self.secondBase.lName + " scored from 2nd.")
+                    #print(self.secondBase.lName + " scored from 2nd.")
                     self.secondBase = None
                     scored = 1
                 else:
                     # advance to third
                     self.thirdBase = self.secondBase
-                    print(self.secondBase.lName + " to 3rd.")
+                    #print(self.secondBase.lName + " to 3rd.")
                     self.secondBase = None
             if self.firstBase is not None:
                 if self.firstBase.speed == 99:
                     self.score()
-                    print(self.firstBase.lName + " scored from 1st.")
+                    #print(self.firstBase.lName + " scored from 1st.")
                     self.firstBase = None
                     scored = 1
                 else:
                     rand = r.randint(0, 100)
                     if (rand < self.firstBase.speed * 100) & (self.thirdBase is None):
                         # advance to 3rd
-                        print(self.firstBase.lName + " to 3rd.")
+                        #print(self.firstBase.lName + " to 3rd.")
                         self.thirdBase = self.firstBase
                         self.firstBase = None
                     else:
                         # advance to 2nd
-                        print(self.firstBase.lName + " to 2nd.")
+                        #print(self.firstBase.lName + " to 2nd.")
                         self.secondBase = self.secondBase
                         self.firstBase = None
 
             self.firstBase = self.batter
-        if scored == 1:
-            self.printScore()
+        #if scored == 1:
+            #self.printScore()
 
     def pitch(self):
 
         self.totalPitches += 1
 
-        if (self.balls == 0) & (self.strikes == 0):
-            print("\t\tNow Batting: " + self.batter.lName)
+        #if (self.balls == 0) & (self.strikes == 0):
+            #print("\t\tNow Batting: " + self.batter.lName)
 
         # ball or strike
         val = .53 + ((self.pitcher.bbnine - 50) / 400)
@@ -228,56 +223,54 @@ class Game:
                 val = .23 + ((self.batter.hit - self.pitcher.hnine) / 400)
                 rand = r.randint(0, 100)
                 if rand < val * 100:
-                    print("\t\tBall in play, hit")
+                    #print("\t\tBall in play, hit")
                     hitorout = "hit"
                     self.detHitType()
                 else:
-                    print("\t\tBall in play, out")
-                    print(self.batter.lName + " got out (" + str(self.outs) + " out)")
+                    #print("\t\tBall in play, out")
+                    #print(self.batter.lName + " got out (" + str(self.outs) + " out)")
                     hitorout = "out"
                     self.outs += 1
                 self.resetCount()
 
         if swingornot == "no swing":
-            print("\t\t" + ballorstrike + "\t\t\t\t" + str(self.balls) + "-" + str(self.strikes))
+            #print("\t\t" + ballorstrike + "\t\t\t\t" + str(self.balls) + "-" + str(self.strikes))
             if self.balls == 4:
 
-                print(self.batter.lName + " walks")
+                #print(self.batter.lName + " walks")
                 self.walks += 1
                 scored = 0
 
                 if self.firstBase is not None:
                     if self.secondBase is not None:
                         if self.thirdBase is not None:
-                            print(self.thirdBase.lName + " scored from 3rd.")
+                            #print(self.thirdBase.lName + " scored from 3rd.")
                             self.thirdBase = None
                             self.score()
                             scored = 1
-                        print(self.secondBase.lName + " to 3rd.")
+                        #(self.secondBase.lName + " to 3rd.")
                         self.thirdBase = self.secondBase
                         self.secondBase = None
-                    print(self.firstBase.lName + " to 2nd.")
+                    #print(self.firstBase.lName + " to 2nd.")
                     self.secondBase = self.firstBase
                     self.firstBase = None
                 self.firstBase = self.batter
                 self.resetCount()
 
-                if scored == 1:
-                    self.printScore()
+                #if scored == 1:
+                    #self.printScore()
 
             elif self.strikes == 3:
                 self.outs += 1
-                print(self.batter.lName + " strikes out looking (" + str(self.outs) + " out)")
+                #print(self.batter.lName + " strikes out looking (" + str(self.outs) + " out)")
                 self.resetCount()
         elif swingornot == "swing":
             if inplayornot == "swing and miss":
-                print("\t\tswinging strike\t\t" + str(self.balls) + "-" + str(self.strikes))
+                #print("\t\tswinging strike\t\t" + str(self.balls) + "-" + str(self.strikes))
                 if self.strikes == 3:
                     self.outs += 1
-                    print(self.batter.lName + " strikes out swinging (" + str(self.outs) + " out)")
+                    #print(self.batter.lName + " strikes out swinging (" + str(self.outs) + " out)")
                     self.resetCount()
-
-
 
     def startGame(self):
         self.inning = 1
@@ -290,18 +283,16 @@ class Game:
                 toPrint += "Top"
             else:
                 toPrint += "Bottom"
-            print("%s of %d\n--- Batting: %s\n--- Pitching: %s\n" % (toPrint, self.inning, self.battingTeam.name, self.pitchingTeam.name))
+            #print("%s of %d\n--- Batting: %s\n--- Pitching: %s\n" % (toPrint, self.inning, self.battingTeam.name, self.pitchingTeam.name))
             while self.outs < 3:
                 self.pitch()
             self.nextHalf()
         if self.hScore > self.aScore:
             self.winner = self.home
+            self.loser = self.away
         else:
             self.winner = self.away
-        #print("\n\ngame over")
-        #self.printBoxScore()
-
-
+            self.loser = self.home
 
     def nextHalf(self):
         self.outs = 0

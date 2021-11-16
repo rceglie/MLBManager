@@ -1,3 +1,5 @@
+from schedulecreation import *
+
 class League:
 
     def __init__(self, tms):
@@ -14,6 +16,7 @@ class League:
         self.NLEast = []
         self.NLCentral = []
         self.NLWest = []
+        self.schedule = createSchedule(self)
 
         for t in tms:
             if t.lg == "AL":
@@ -56,3 +59,17 @@ class League:
 
     def getTeam(self, i):
         return self.allTeams[i]
+
+    def sort(self):
+        self.ALEast.sort(key=lambda team: team.wins, reverse=True)
+        self.ALCentral.sort(key=lambda team: team.wins, reverse=True)
+        self.ALWest.sort(key=lambda team: team.wins, reverse=True)
+        self.NLEast.sort(key=lambda team: team.wins, reverse=True)
+        self.NLCentral.sort(key=lambda team: team.wins, reverse=True)
+        self.NLWest.sort(key=lambda team: team.wins, reverse=True)
+
+    def newSeason(self):
+        self.year += 1
+        self.schedule = createSchedule(self)
+        for t in self.allTeams:
+            t.newSeason()

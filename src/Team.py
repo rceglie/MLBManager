@@ -15,6 +15,8 @@ class Team:
         for i in range(9):
             blank = []
             self.positions.append(blank)
+        self.rotation = []
+        self.spotInRotation = 0
 
     def addPlayer(self, p):
         if p.position == 1:
@@ -40,3 +42,18 @@ class Team:
         for pos in self.positions:
             for p in pos:
                 p.printShort()
+
+    def newSeason(self):
+        self.wins = 0
+        self.losses = 0
+
+    def setRotation(self):
+        self.rotation = sorted(self.positions[0], key=lambda player: player.hnine, reverse=True)
+
+    def getStarter(self):
+        ret = self.rotation[self.spotInRotation]
+        if self.spotInRotation == 4:
+            self.spotInRotation = 0
+        else:
+            self.spotInRotation += 1
+        return ret

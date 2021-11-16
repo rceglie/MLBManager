@@ -77,7 +77,7 @@ class Player:
         print("K/9: \t\t", self.knine)
         print("\n")
 
-    def printFull(self): # not updated
+    def printFull(self):  # not updated
         print("FName: \t\t", self.fName)
         print("LName: \t\t", self.lName)
         print("Age: \t\t", self.age)
@@ -90,7 +90,7 @@ class Player:
         print("Years Left: ", self.yearsLeft)
         self.printStats()
 
-    def printStats(self):   # not updated
+    def printStats(self):  # not updated
         print("Hits: \t\t", self.hits)
         print("HR: \t\t", self.hits)
         print("AB: \t\t", self.hits)
@@ -116,7 +116,9 @@ class Player:
 
     def toString(self):
         ret = self.fName + "," + self.lName + "," + str(self.age) + "," + str(self.position) + "," + str(self.hit)
-        ret = ret + "," + str(self.power) + "," + str(self.contact) + "," + str(self.eye) + "," + str(self.speed) + "," + str(self.hnine) + ","
-        ret = ret + str(self.bbnine) + "," + str(self.knine) + "," + self.team + "," + str(self.salary) + "," + str(self.yearsLeft)
+        ret = ret + "," + str(self.power) + "," + str(self.contact) + "," + str(self.eye) + "," + str(
+            self.speed) + "," + str(self.hnine) + ","
+        ret = ret + str(self.bbnine) + "," + str(self.knine) + "," + self.team + "," + str(self.salary) + "," + str(
+            self.yearsLeft)
         ret = ret + "\n"
         return ret
