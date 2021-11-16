@@ -35,8 +35,6 @@ class GameTeam:
 
         self.pitcher = self.team.getStarter()
 
-
-
     def printLineup(self):
         print("\n\n" + self.team.name + " " + "Lineup\n\n")
         for player in self.lineup:

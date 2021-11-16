@@ -95,7 +95,6 @@ def firstload():
 
     # write masterPlayerList to text file
 
-
     file = open("C:\\Users\\Robert\\IdeaProjects\\MLBManager\\save\\players.txt", "w")
     for player in masterPlayerList:
         file.write(player.toString())
@@ -136,9 +135,8 @@ def load():
         player = Player(ps)
         if player.team != "FA":
             teams[teamNames.index(player.team)].addPlayer(player)
-            #league.allTeams[teamNames.index(player.team)].addPlayer(player)
+            # league.allTeams[teamNames.index(player.team)].addPlayer(player)
         else:
             league.addFreeAgent(player)
-
 
     return league

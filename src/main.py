@@ -8,7 +8,6 @@ import time
 
 
 def main():
-
     league = startup()
 
     seasons = 1
@@ -25,15 +24,15 @@ def main():
             bestWins = league.allTeams[3].wins
         if worstWins > league.allTeams[3].wins:
             worstWins = league.allTeams[3].wins
-    print("Average: %.1f wins/season" % (totalWins/seasons))
+    print("Average: %.1f wins/season" % (totalWins / seasons))
     print("Best: %d wins" % (bestWins))
     print("Worst: %d wins" % (worstWins))
-    print("Variance: %.1f wins" % (.5 * ((bestWins-(totalWins/seasons))+((totalWins/seasons)-worstWins))))
+    print("Variance: %.1f wins" % (.5 * ((bestWins - (totalWins / seasons)) + ((totalWins / seasons) - worstWins))))
 
     printSeasonStandings(league)
 
-def printSeasonStandings(league):
 
+def printSeasonStandings(league):
     print("\tAL East\n\t\tW\tL\t%")
     for t in league.ALEast:
         print("%s\t\t%d\t%d\t.%0.3d" % (t.abb, t.wins, t.losses, t.wins / .162))
@@ -53,22 +52,22 @@ def printSeasonStandings(league):
     for t in league.NLWest:
         print("%s\t\t%d\t%d\t.%0.3d" % (t.abb, t.wins, t.losses, t.wins / .162))
 
-def simulateSeason(league):
 
+def simulateSeason(league):
     j = 0
     for day in league.schedule:
         i = 0
         j += 1
         for matchup in day:
-            #print("Day #%d, Game #%d" %(j, i))
-            #print("%s vs %s" % (matchup[0].name, matchup[1].name))
+            # print("Day #%d, Game #%d" %(j, i))
+            # print("%s vs %s" % (matchup[0].name, matchup[1].name))
             i += 1
             result = simulateGame(league, matchup[0], matchup[1])
             result[0].team.wins += 1
             result[1].team.losses += 1
 
-def simulateGame(le, a, b):
 
+def simulateGame(le, a, b):
     # creates GameTeams for each
     gt1 = GameTeam(a)
     gt2 = GameTeam(b)
@@ -79,7 +78,7 @@ def simulateGame(le, a, b):
 
     # creates and simulates game
     game = Game(gt1, gt2)
-    #print(gt1.name + " vs " + gt2.name)
+    # print(gt1.name + " vs " + gt2.name)
     game.pitcher = gt2.positions[0]
     game.batter = gt1.lineup[0]
     game.startGame()
