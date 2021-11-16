@@ -21,6 +21,8 @@ class Game:
         self.firstBase = None
         self.secondBase = None
         self.thirdBase = None
+        self.hPC = 0 # home pitch count
+        self.aPC = 0 # away pitch count
 
         # debugging stats
 
@@ -174,14 +176,16 @@ class Game:
 
     def pitch(self):
 
-        self.totalPitches += 1
+        if self.pitchingTeam == self.home:
+            self.hPC += 1
+        else:
+            self.aPC += 1
 
         # if (self.balls == 0) & (self.strikes == 0):
         # print("\t\tNow Batting: " + self.batter.lName)
 
         # ball or strike
-        val = .53 + ((self.pitcher.bbnine - 50) / 400)
-        val = .55
+        val = .66 + ((self.pitcher.bbnine - 50) / 400)
         rand = r.randint(0, 100)
         if rand < val * 100:
             ballorstrike = "strike"
@@ -191,10 +195,9 @@ class Game:
 
         # swing?
         if ballorstrike == "strike":
-            val = .66 + ((self.batter.eye - 50) / 150)
+            val = .68 + ((self.batter.eye - 50) / 150)
         else:
-            val = .15 + ((self.pitcher.knine - self.batter.eye) / 750)
-            val = .1
+            val = .27 + 0 + ((self.pitcher.knine - self.batter.eye) / 150)
         rand = r.randint(0, 100)
         if rand < val * 100:
             swingornot = "swing"
@@ -205,33 +208,37 @@ class Game:
             else:
                 self.balls += 1
 
-        # in play or swing and miss?
+        # contact or swing and miss?
         if swingornot == "swing":
             if ballorstrike == "strike":
-                val = .65 + (((1 * self.batter.contact) - self.pitcher.knine) / 200)
+                val = .80 + (((1 * self.batter.contact) - self.pitcher.knine) / 200)
             else:
-                val = .1 + ((self.batter.contact - self.pitcher.knine) / 1500)
+                val = .55 + ((self.batter.contact - self.pitcher.knine) / 200)
             rand = r.randint(0, 100)
             if rand < val * 100:
-                inplayornot = "in play"
+                contact = "yes"
             else:
-                inplayornot = "swing and miss"
+                contact = "no"
                 self.strikes += 1
 
-            # hit or out?
-            if inplayornot == "in play":
-                val = .23 + ((self.batter.hit - self.pitcher.hnine) / 400)
-                rand = r.randint(0, 100)
-                if rand < val * 100:
-                    # print("\t\tBall in play, hit")
-                    hitorout = "hit"
-                    self.detHitType()
+            # hit, out, or foul?
+            if contact == "yes":
+                if r.randint(0, 100) < 55:  # flat 55% chance of foul ball
+                    if self.strikes < 2:
+                        self.strikes += 1
                 else:
+                    val = .45 + ((self.batter.hit - self.pitcher.hnine) / 400)
+                    rand = r.randint(0, 100)
+                    if rand < val * 100:
+                        # print("\t\tBall in play, hit")
+                        hitorout = "hit"
+                        self.detHitType()
+                    else:
                     # print("\t\tBall in play, out")
                     # print(self.batter.lName + " got out (" + str(self.outs) + " out)")
-                    hitorout = "out"
-                    self.outs += 1
-                self.resetCount()
+                        hitorout = "out"
+                        self.outs += 1
+                    self.resetCount()
 
         if swingornot == "no swing":
             # print("\t\t" + ballorstrike + "\t\t\t\t" + str(self.balls) + "-" + str(self.strikes))
@@ -265,7 +272,7 @@ class Game:
                 # print(self.batter.lName + " strikes out looking (" + str(self.outs) + " out)")
                 self.resetCount()
         elif swingornot == "swing":
-            if inplayornot == "swing and miss":
+            if contact == "no":
                 # print("\t\tswinging strike\t\t" + str(self.balls) + "-" + str(self.strikes))
                 if self.strikes == 3:
                     self.outs += 1

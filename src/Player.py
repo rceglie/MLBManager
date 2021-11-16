@@ -61,9 +61,16 @@ class Player:
         self.hnine = int(list[9])
         self.bbnine = int(list[10])
         self.knine = int(list[11])
-        self.team = list[12]
-        self.salary = list[13]
-        self.yearsLeft = list[14]
+        self.stamina = int(list[12])
+        self.energy = int(list[13])
+        self.battery = float(list[14])
+        self.team = list[15]
+        self.salary = list[16]
+        self.yearsLeft = list[17]
+
+    def getBattery(self):
+        self.battery = self.stamina * self.energy * self.energy
+        return self.battery
 
     def printShort(self):
         print(self.position, self.fName, self.lName)
@@ -75,6 +82,9 @@ class Player:
         print("H/9: \t\t", self.hnine)
         print("BB/9: \t\t", self.bbnine)
         print("K/9: \t\t", self.knine)
+        print("Stamina: \t\t", self.stamina)
+        print("Energy: \t\t", self.energy)
+        print("Battery: \t\t", self.battery)
         print("\n")
 
     def printFull(self):  # not updated
@@ -118,7 +128,8 @@ class Player:
         ret = self.fName + "," + self.lName + "," + str(self.age) + "," + str(self.position) + "," + str(self.hit)
         ret = ret + "," + str(self.power) + "," + str(self.contact) + "," + str(self.eye) + "," + str(
             self.speed) + "," + str(self.hnine) + ","
-        ret = ret + str(self.bbnine) + "," + str(self.knine) + "," + self.team + "," + str(self.salary) + "," + str(
-            self.yearsLeft)
+        ret += str(self.bbnine) + "," + str(self.knine) + ","
+        ret = ret + str(self.stamina) + "," + str(self.energy) + "," + str(self.getBattery()) + ","
+        ret = ret + self.team + "," + str(self.salary) + "," + str(self.yearsLeft)
         ret = ret + "\n"
         return ret

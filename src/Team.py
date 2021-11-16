@@ -47,6 +47,11 @@ class Team:
         self.wins = 0
         self.losses = 0
 
+    def updateBatter(self):
+        for p in self.pitchers:
+            p.getBattery()
+
+
     def setRotation(self):
         self.rotation = sorted(self.positions[0], key=lambda player: player.hnine, reverse=True)
 

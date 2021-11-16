@@ -11,46 +11,55 @@ def main():
     league = startup()
 
     seasons = 1
-    totalWins = 0
-    bestWins = 0
-    worstWins = 10000
     for i in range(seasons):
         league.newSeason()
         simulateSeason(league)
         league.sort()
-        print(league.allTeams[3].wins)
-        totalWins += league.allTeams[3].wins
-        if bestWins < league.allTeams[3].wins:
-            bestWins = league.allTeams[3].wins
-        if worstWins > league.allTeams[3].wins:
-            worstWins = league.allTeams[3].wins
-    print("Average: %.1f wins/season" % (totalWins / seasons))
-    print("Best: %d wins" % (bestWins))
-    print("Worst: %d wins" % (worstWins))
-    print("Variance: %.1f wins" % (.5 * ((bestWins - (totalWins / seasons)) + ((totalWins / seasons) - worstWins))))
-
     printSeasonStandings(league)
+    total = 0
+    #for i in range(seasons):
+    #    total += simulateGame(league, league.allTeams[i%30], league.allTeams[(i*2)%30])
+    #print(total/(2*seasons))
+
 
 
 def printSeasonStandings(league):
+    avg = 0
     print("\tAL East\n\t\tW\tL\t%")
     for t in league.ALEast:
         print("%s\t\t%d\t%d\t.%0.3d" % (t.abb, t.wins, t.losses, t.wins / .162))
+        avg += t.wins
+    print("\t\t\t\t.%d" % (avg/5/.162))
+    avg = 0
     print("\tAL Central")
     for t in league.ALCentral:
         print("%s\t\t%d\t%d\t.%0.3d" % (t.abb, t.wins, t.losses, t.wins / .162))
+        avg += t.wins
+    print("\t\t\t\t.%d" % (avg/5/.162))
+    avg = 0
     print("\tAL West")
     for t in league.ALWest:
         print("%s\t\t%d\t%d\t.%0.3d" % (t.abb, t.wins, t.losses, t.wins / .162))
+        avg += t.wins
+    print("\t\t\t\t.%d" % (avg/5/.162))
+    avg = 0
     print("\tNL East")
     for t in league.NLEast:
         print("%s\t\t%d\t%d\t.%0.3d" % (t.abb, t.wins, t.losses, t.wins / .162))
+        avg += t.wins
+    print("\t\t\t\t.%d" % (avg/5/.162))
+    avg = 0
     print("\tNL Central")
     for t in league.NLCentral:
         print("%s\t\t%d\t%d\t.%0.3d" % (t.abb, t.wins, t.losses, t.wins / .162))
+        avg += t.wins
+    print("\t\t\t\t.%d" % (avg/5/.162))
+    avg = 0
     print("\tNL West")
     for t in league.NLWest:
         print("%s\t\t%d\t%d\t.%0.3d" % (t.abb, t.wins, t.losses, t.wins / .162))
+        avg += t.wins
+    print("\t\t\t\t.%d" % (avg/5/.162))
 
 
 def simulateSeason(league):
@@ -82,7 +91,8 @@ def simulateGame(le, a, b):
     game.pitcher = gt2.positions[0]
     game.batter = gt1.lineup[0]
     game.startGame()
-
+    #return game.hScore + game.aScore
+    #return game.hPC + game.aPC
     return [game.winner, game.loser]
 
 
