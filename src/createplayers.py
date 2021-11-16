@@ -17,6 +17,7 @@ def createHitters(num):
         construct.append(r.randint(1, 99))  # power stat
         construct.append(r.randint(1, 99))  # contact stat
         construct.append(r.randint(1, 99))  # eye stat
+        construct.append(r.randint(1, 99))  # speed stat
         construct.append(r.randint(1, 99))  # h/9 stat
         construct.append(r.randint(1, 99))  # bb/9 stat
         construct.append(r.randint(1, 99))  # k/9 stat
@@ -40,6 +41,7 @@ def createPosition(num, pos):
         construct.append(r.randint(1, 99))  # power stat
         construct.append(r.randint(1, 99))  # contact stat
         construct.append(r.randint(1, 99))  # eye stat
+        construct.append(r.randint(1, 99))  # speed stat
         construct.append(r.randint(1, 99))  # h/9 stat
         construct.append(r.randint(1, 99))  # bb/9 stat
         construct.append(r.randint(1, 99))  # k/9 stat

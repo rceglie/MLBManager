@@ -57,12 +57,13 @@ class Player:
         self.power = int(list[5])
         self.contact = int(list[6])
         self.eye = int(list[7])
-        self.hnine = int(list[8])
-        self.bbnine = int(list[9])
-        self.knine = int(list[10])
-        self.team = list[11]
-        self.salary = list[12]
-        self.yearsLeft = list[13]
+        self.speed = int(list[8])
+        self.hnine = int(list[9])
+        self.bbnine = int(list[10])
+        self.knine = int(list[11])
+        self.team = list[12]
+        self.salary = list[13]
+        self.yearsLeft = list[14]
 
     def printShort(self):
         print(self.position, self.fName, self.lName)
@@ -70,6 +71,7 @@ class Player:
         print("Power: \t\t", self.power)
         print("Contact: \t", self.contact)
         print("Eye: \t\t", self.eye)
+        print("Speed: \t\t", self.speed)
         print("H/9: \t\t", self.hnine)
         print("BB/9: \t\t", self.bbnine)
         print("K/9: \t\t", self.knine)
@@ -114,7 +116,7 @@ class Player:
 
     def toString(self):
         ret = self.fName + "," + self.lName + "," + str(self.age) + "," + str(self.position) + "," + str(self.hit)
-        ret = ret + "," + str(self.power) + "," + str(self.contact) + "," + str(self.eye) + "," + str(self.hnine) + ","
+        ret = ret + "," + str(self.power) + "," + str(self.contact) + "," + str(self.eye) + "," + str(self.speed) + "," + str(self.hnine) + ","
         ret = ret + str(self.bbnine) + "," + str(self.knine) + "," + self.team + "," + str(self.salary) + "," + str(self.yearsLeft)
         ret = ret + "\n"
         return ret

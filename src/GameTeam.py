@@ -9,6 +9,7 @@ class GameTeam:
         self.positions = []
         self.toBat = 0
         self.batter = None
+        self.pitcher = None
 
     def bestLineup(self):
         self.positions.append(self.team.positions[0][0])
@@ -29,6 +30,7 @@ class GameTeam:
         self.lineup[1] = self.lineup[2]
         self.lineup[2] = temp  # swaps 1 and 3
         self.batter = self.lineup[0]
+        self.pitcher = self.lineup[8]
 
     def printLineup(self):
         print("\n\n" + self.team.name + " " + "Lineup\n\n")
