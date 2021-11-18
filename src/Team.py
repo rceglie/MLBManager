@@ -47,15 +47,18 @@ class Team:
         self.wins = 0
         self.losses = 0
 
-    def updateBatter(self):
+    def updateBattery(self):
         for p in self.pitchers:
             p.getBattery()
 
 
-    def setRotation(self):
-        self.rotation = sorted(self.positions[0], key=lambda player: player.hnine, reverse=True)
+    def updatePitchers(self):
+        self.updateBattery()
+        self.rotation = sorted(self.positions[0], key=lambda player: player.battery, reverse=True)
+        self.bullpen = sorted(self.positions[0], key=lambda player: player.battery, reverse=True)
 
     def getStarter(self):
+        self.updatePitchers()
         ret = self.rotation[self.spotInRotation]
         if self.spotInRotation == 4:
             self.spotInRotation = 0

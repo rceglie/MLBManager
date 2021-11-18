@@ -22,7 +22,7 @@ def createHitters(num):
         construct.append(r.randint(1, 99))  # bb/9 stat
         construct.append(r.randint(1, 99))  # k/9 stat
         construct.append(r.randint(1, 99))  # stamina stat
-        construct.append(r.randint(1, 99))  # energy stat
+        construct.append(100)  # energy
         construct.append(r.randint(1, 99))  # battery stat
         construct.append("FA")  # team
         construct.append(0)  # salary
@@ -49,7 +49,7 @@ def createPosition(num, pos):
         construct.append(r.randint(1, 99))  # bb/9 stat
         construct.append(r.randint(1, 99))  # k/9 stat
         construct.append(r.randint(1, 99))  # stamina stat
-        construct.append(r.randint(1, 99))  # energy stat
+        construct.append(100)  # energy
         construct.append(r.randint(1, 99))  # battery stat
         construct.append("FA")  # team
         construct.append(0)  # salary

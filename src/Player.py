@@ -69,22 +69,23 @@ class Player:
         self.yearsLeft = list[17]
 
     def getBattery(self):
-        self.battery = self.stamina * self.energy * self.energy
+        self.battery = self.stamina * self.energy * self.energy / 100000
         return self.battery
 
+
     def printShort(self):
-        print(self.position, self.fName, self.lName)
-        print("Hit: \t\t", self.hit)
+        print("%s %s %s (%s)" % (str(self.position), self.fName, self.lName, self.team))
+        print("\nHit: \t\t", self.hit)
         print("Power: \t\t", self.power)
         print("Contact: \t", self.contact)
         print("Eye: \t\t", self.eye)
         print("Speed: \t\t", self.speed)
-        print("H/9: \t\t", self.hnine)
+        print("\nH/9: \t\t", self.hnine)
         print("BB/9: \t\t", self.bbnine)
         print("K/9: \t\t", self.knine)
-        print("Stamina: \t\t", self.stamina)
-        print("Energy: \t\t", self.energy)
-        print("Battery: \t\t", self.battery)
+        print("Stamina: \t", self.stamina)
+        print("Energy: \t", self.energy)
+        print("Battery: \t", self.battery)
         print("\n")
 
     def printFull(self):  # not updated

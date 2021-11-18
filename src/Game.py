@@ -23,6 +23,8 @@ class Game:
         self.thirdBase = None
         self.hPC = 0 # home pitch count
         self.aPC = 0 # away pitch count
+        self.pitched = [] # list of pitchers who pitched in the game
+        self.ballorstrike = "" # if pitch is ball or strike
 
         # debugging stats
 
@@ -174,116 +176,116 @@ class Game:
         # if scored == 1:
         # self.printScore()
 
-    def pitch(self):
-
-        if self.pitchingTeam == self.home:
-            self.hPC += 1
+    def detContactType(self):
+        if r.randint(0, 100) < 55:  # flat 55% chance of foul ball
+            if self.strikes < 2:
+                self.strikes += 1
         else:
-            self.aPC += 1
+            val = .45 + ((self.batter.hit - self.pitcher.hnine) / 400)
+            rand = r.randint(0, 100)
+            if rand < val * 100:
+                # print("\t\tBall in play, hit")
+                hitorout = "hit"
+                self.detHitType()
+            else:
+                # print("\t\tBall in play, out")
+                # print(self.batter.lName + " got out (" + str(self.outs) + " out)")
+                hitorout = "out"
+                self.outs += 1
+            self.resetCount()
 
-        # if (self.balls == 0) & (self.strikes == 0):
-        # print("\t\tNow Batting: " + self.batter.lName)
-
-        # ball or strike
-        val = .66 + ((self.pitcher.bbnine - 50) / 400)
+    def detIfContact(self):
+        if self.ballorstrike == "strike":
+            val = .80 + (((1 * self.batter.contact) - self.pitcher.knine) / 200)
+        else:
+            val = .55 + ((self.batter.contact - self.pitcher.knine) / 200)
         rand = r.randint(0, 100)
-        if rand < val * 100:
-            ballorstrike = "strike"
-            self.totalStrikes += 1
-        else:
-            ballorstrike = "ball"
+        if rand < val * 100:    # contact
+            self.detContactType()
+        else:   # no contact
+            self.strikes += 1
+            if self.strikes == 3:
+                self.outs += 1
+                # print(self.batter.lName + " strikes out swinging (" + str(self.outs) + " out)")
+                self.resetCount()
 
-        # swing?
-        if ballorstrike == "strike":
+    def detIfSwing(self):
+        if self.ballorstrike == "strike":
             val = .68 + ((self.batter.eye - 50) / 150)
         else:
             val = .27 + 0 + ((self.pitcher.knine - self.batter.eye) / 150)
         rand = r.randint(0, 100)
         if rand < val * 100:
-            swingornot = "swing"
+            self.detIfContact()
         else:
-            swingornot = "no swing"
-            if ballorstrike == "strike":
+            if self.ballorstrike == "strike":
                 self.strikes += 1
             else:
                 self.balls += 1
 
-        # contact or swing and miss?
-        if swingornot == "swing":
-            if ballorstrike == "strike":
-                val = .80 + (((1 * self.batter.contact) - self.pitcher.knine) / 200)
-            else:
-                val = .55 + ((self.batter.contact - self.pitcher.knine) / 200)
-            rand = r.randint(0, 100)
-            if rand < val * 100:
-                contact = "yes"
-            else:
-                contact = "no"
-                self.strikes += 1
-
-            # hit, out, or foul?
-            if contact == "yes":
-                if r.randint(0, 100) < 55:  # flat 55% chance of foul ball
-                    if self.strikes < 2:
-                        self.strikes += 1
-                else:
-                    val = .45 + ((self.batter.hit - self.pitcher.hnine) / 400)
-                    rand = r.randint(0, 100)
-                    if rand < val * 100:
-                        # print("\t\tBall in play, hit")
-                        hitorout = "hit"
-                        self.detHitType()
-                    else:
-                    # print("\t\tBall in play, out")
-                    # print(self.batter.lName + " got out (" + str(self.outs) + " out)")
-                        hitorout = "out"
-                        self.outs += 1
-                    self.resetCount()
-
-        if swingornot == "no swing":
-            # print("\t\t" + ballorstrike + "\t\t\t\t" + str(self.balls) + "-" + str(self.strikes))
             if self.balls == 4:
-
-                # print(self.batter.lName + " walks")
-                self.walks += 1
-                scored = 0
-
-                if self.firstBase is not None:
-                    if self.secondBase is not None:
-                        if self.thirdBase is not None:
-                            # print(self.thirdBase.lName + " scored from 3rd.")
-                            self.thirdBase = None
-                            self.score()
-                            scored = 1
-                        # (self.secondBase.lName + " to 3rd.")
-                        self.thirdBase = self.secondBase
-                        self.secondBase = None
-                    # print(self.firstBase.lName + " to 2nd.")
-                    self.secondBase = self.firstBase
-                    self.firstBase = None
-                self.firstBase = self.batter
-                self.resetCount()
-
-                # if scored == 1:
-                # self.printScore()
-
+                self.walk()
             elif self.strikes == 3:
                 self.outs += 1
                 # print(self.batter.lName + " strikes out looking (" + str(self.outs) + " out)")
                 self.resetCount()
-        elif swingornot == "swing":
-            if contact == "no":
-                # print("\t\tswinging strike\t\t" + str(self.balls) + "-" + str(self.strikes))
-                if self.strikes == 3:
-                    self.outs += 1
-                    # print(self.batter.lName + " strikes out swinging (" + str(self.outs) + " out)")
-                    self.resetCount()
+
+    def walk(self):
+        # print(self.batter.lName + " walks")
+        self.walks += 1
+        scored = 0
+
+        if self.firstBase is not None:
+            if self.secondBase is not None:
+                if self.thirdBase is not None:
+                    # print(self.thirdBase.lName + " scored from 3rd.")
+                    self.thirdBase = None
+                    self.score()
+                    scored = 1
+                # (self.secondBase.lName + " to 3rd.")
+                self.thirdBase = self.secondBase
+                self.secondBase = None
+            # print(self.firstBase.lName + " to 2nd.")
+            self.secondBase = self.firstBase
+            self.firstBase = None
+        self.firstBase = self.batter
+        self.resetCount()
+
+        # if scored == 1:
+        # self.printScore()
+
+    def pitch(self):
+
+        # adjust pitcher energy
+        self.pitcher.energy -= 1
+
+        # adds to pitch count
+        if self.pitchingTeam == self.home:
+            self.hPC += 1
+        else:
+            self.aPC += 1
+        # if (self.balls == 0) & (self.strikes == 0):
+        #    print("\t\tNow Batting: " + self.batter.lName)
+
+        # determine ball or strike thrown
+        val = .66 + ((self.pitcher.bbnine - 50) / 400)
+        rand = r.randint(0, 100)
+        if rand < val * 100:
+            self.ballorstrike = "strike"
+            self.totalStrikes += 1
+        else:
+            self.ballorstrike = "ball"
+
+        # determine if batter is swinging
+        self.detIfSwing()
 
     def startGame(self):
+
         self.inning = 1
         self.half = 0
         self.outs = 0
         self.batter = self.battingTeam.batter
+        self.pitcher = self.pitchingTeam.pitcher
         while (self.inning < (self.games * 9) + 1) | (self.half == 1) | (self.aScore == self.hScore):
             toPrint = "\n--- "
             if (self.half == 0):
@@ -292,14 +294,33 @@ class Game:
                 toPrint += "Bottom"
             # print("%s of %d\n--- Batting: %s\n--- Pitching: %s\n" % (toPrint, self.inning, self.battingTeam.name, self.pitchingTeam.name))
             while self.outs < 3:
+                if self.pitcher.energy < 2:
+                    self.pitcher = self.pitchingTeam.team.getStarter()
                 self.pitch()
             self.nextHalf()
+
+        self.gameover()
+
+    def gameover(self):
+        # determines winner
         if self.hScore > self.aScore:
             self.winner = self.home
             self.loser = self.away
         else:
             self.winner = self.away
             self.loser = self.home
+        # adds energy to everyone who didn't pitch
+        for p in self.home.team.pitchers:
+            if (p not in self.pitched) & (p.energy < 100):
+                p.energy += 20
+        for p in self.away.team.pitchers:
+            if (p not in self.pitched) & (p.energy < 100):
+                p.energy += 20
+
+
+        print(self.home.pitcher.printShort())
+        print(self.away.pitcher.printShort())
+
 
     def nextHalf(self):
         self.outs = 0
@@ -323,3 +344,9 @@ class Game:
         self.balls = 0
         self.battingTeam.nextBatter()
         self.batter = self.battingTeam.batter
+        self.recordPitcher(self.pitcher)
+
+    def recordPitcher(self, pitch):
+
+        if pitch not in self.pitched:
+            self.pitched.append(pitch)

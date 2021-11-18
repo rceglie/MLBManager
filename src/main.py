@@ -9,7 +9,9 @@ import time
 
 def main():
     league = startup()
-
+    for t in league.allTeams:
+        pitchers = sorted(t.pitchers, key=lambda player: player.battery, reverse=True)
+    #simulateGame(league, league.allTeams[3], league.allTeams[18])
     seasons = 1
     for i in range(seasons):
         league.newSeason()
