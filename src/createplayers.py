@@ -23,7 +23,6 @@ def createHitters(num):
         construct.append(1)  # k/9 stat
         construct.append(1)  # stamina stat
         construct.append(1)  # energy
-        construct.append(1)  # battery stat
         construct.append("FA")  # team
         construct.append(0)  # salary
         construct.append(0)  # yearsleft
@@ -53,13 +52,12 @@ def createPosition(num, pos):
         construct.append(r.randint(1, 99))  # bb/9 stat
         construct.append(r.randint(1, 99))  # k/9 stat
         if pos == 1:
-            construct.append(r.randint(1, 65))  # stamina stat
+            construct.append(r.randint(20, 49))  # stamina stat
         elif pos == 0:
-            construct.append(r.randint(75, 99))  # stamina stat
+            construct.append(r.randint(50, 99))  # stamina stat
         else:
             construct.append(r.randint(1, 1))  # stamina stat
         construct.append(100)  # energy
-        construct.append(r.randint(1, 99))  # battery stat
         construct.append("FA")  # team
         construct.append(0)  # salary
         construct.append(0)  # yearsleft

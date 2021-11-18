@@ -53,7 +53,7 @@ class Player:
         self.team = list[14]
         self.salary = list[15]
         self.yearsLeft = list[16]
-        if self.stamina > 74:
+        if self.stamina > 49:
             self.type = "starter"
         else:
             self.type = "reliever"
@@ -74,6 +74,9 @@ class Player:
         if self.position == 1:
             print("Type: \t", self.type)
         print("\n")
+
+    def printStam(self):
+        print("%s %s (%.2f)" % (self.fName, self.lName, self.energy))
 
     def printFull(self):  # not updated
         print("FName: \t\t", self.fName)

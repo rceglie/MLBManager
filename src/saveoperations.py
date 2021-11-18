@@ -9,7 +9,7 @@ import timeit
 def startup():
     # checks if there is already a save
 
-    if os.stat("C:\\Users\\cegli\\IdeaProjects\\MLBManager\\save\\save.txt").st_size == 0:
+    if os.stat("C:\\Users\\Robert\\IdeaProjects\\MLBManager\\save\\save.txt").st_size == 0:
         return firstload()
     else:
         return load()
@@ -18,7 +18,7 @@ def startup():
 def firstload():
     # writes 0 in save file to write something
 
-    file = open("C:\\Users\\cegli\\IdeaProjects\\MLBManager\\save\\save.txt", "w")
+    file = open("C:\\Users\\Robert\\IdeaProjects\\MLBManager\\save\\save.txt", "w")
     file.write("0")
     file.close()
 
@@ -59,7 +59,7 @@ def firstload():
     teams.append(Team("Toronto", "Blue Jays", "TOR", "AL", "east"))
     teams.append(Team("Washington", "Nationals", "WSH", "NL", "east"))
 
-    file = open("C:\\Users\\cegli\\IdeaProjects\\MLBManager\\save\\teams.txt", "w")
+    file = open("C:\\Users\\Robert\\IdeaProjects\\MLBManager\\save\\teams.txt", "w")
     for team in teams:
         file.write(team.toString())
     file.close()
@@ -96,7 +96,7 @@ def firstload():
 
     # write masterPlayerList to text file
 
-    file = open("C:\\Users\\cegli\\IdeaProjects\\MLBManager\\save\\players.txt", "w")
+    file = open("C:\\Users\\Robert\\IdeaProjects\\MLBManager\\save\\players.txt", "w")
     for player in masterPlayerList:
         file.write(player.toString())
     file.close()
@@ -109,11 +109,11 @@ def load():
     teamsString = []
     teams = []
 
-    with open("C:\\Users\\cegli\\IdeaProjects\\MLBManager\\save\\players.txt", "r") as file:
+    with open("C:\\Users\\Robert\\IdeaProjects\\MLBManager\\save\\players.txt", "r") as file:
         for line in file:  # parse every player
             playerString.append(line)
         file.close()
-    with open("C:\\Users\\cegli\\IdeaProjects\\MLBManager\\save\\teams.txt", "r") as file:
+    with open("C:\\Users\\Robert\\IdeaProjects\\MLBManager\\save\\teams.txt", "r") as file:
         for line in file:  # parse every team
             teamsString.append(line)
     file.close()

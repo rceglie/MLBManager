@@ -17,10 +17,8 @@ def main():
         simulateSeason(league)
         league.sort()
     printSeasonStandings(league)
-    total = 0
     #for i in range(seasons):
-    #    total += simulateGame(league, league.allTeams[i%30], league.allTeams[(i*2)%30])
-    #print(total/(2*seasons))
+    #    simulateGame(league, league.allTeams[3], league.allTeams[18])
 
 
 
@@ -91,11 +89,6 @@ def simulateGame(le, a, b):
     # print(gt1.name + " vs " + gt2.name)
     game.pitcher = gt2.positions[0]
     game.batter = gt1.lineup[0]
-
-    if (gt1.name == "Red Sox"):
-        print(gt1.pitcher.lName)
-    if (gt2.name == "Red Sox"):
-        print(gt2.pitcher.lName)
 
     game.startGame()
     #return game.hScore + game.aScore

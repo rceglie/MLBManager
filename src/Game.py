@@ -23,7 +23,6 @@ class Game:
         self.thirdBase = None
         self.hPC = 0 # home pitch count
         self.aPC = 0 # away pitch count
-        self.pitched = [] # list of pitchers who pitched in the game
         self.ballorstrike = "" # if pitch is ball or strike
 
         # debugging stats
@@ -35,6 +34,9 @@ class Game:
         self.games = 1
 
     def score(self):
+
+        self.pitcher.energy -= 5 * (.85 + (pow((75-self.pitcher.stamina), 3)/100000))
+
         if self.battingTeam == self.home:
             self.hScore += 1
         else:
@@ -47,6 +49,8 @@ class Game:
         print("\n********* %s: %d --- %s: %d *********\n" % (self.home.name, self.hScore, self.away.name, self.aScore))
 
     def detHitType(self):
+
+        self.pitcher.energy -= 2 * (.85 + (pow((75-self.pitcher.stamina), 3)/100000))
 
         self.totalHits += 1
 
@@ -231,6 +235,9 @@ class Game:
                 self.resetCount()
 
     def walk(self):
+
+        self.pitcher.energy -= 2 * (.85 + (pow((75-self.pitcher.stamina), 3)/100000))
+
         # print(self.batter.lName + " walks")
         self.walks += 1
         scored = 0
@@ -257,7 +264,7 @@ class Game:
     def pitch(self):
 
         # adjust pitcher energy
-        self.pitcher.energy -= 1
+        self.pitcher.energy -= .85 + (pow((75-self.pitcher.stamina), 3)/100000)
 
         # adds to pitch count
         if self.pitchingTeam == self.home:
@@ -294,9 +301,9 @@ class Game:
                 toPrint += "Bottom"
             # print("%s of %d\n--- Batting: %s\n--- Pitching: %s\n" % (toPrint, self.inning, self.battingTeam.name, self.pitchingTeam.name))
             while self.outs < 3:
-                if self.pitcher.energy < 2:
-                    balls = 1
-                    #self.pitcher = self.pitchingTeam.team.getStarter()
+                if self.pitcher.energy < 5: # pitcher out of energy, change pitcher
+                    #print("pitching change")
+                    self.pitcher = self.pitchingTeam.getReliever()
                 self.pitch()
             self.nextHalf()
 
@@ -310,20 +317,10 @@ class Game:
         else:
             self.winner = self.away
             self.loser = self.home
-        # adds energy to everyone who didn't pitch
-        for p in self.home.team.rotation:
-            if (p not in self.pitched) & (p.energy < 100):
-                p.energy += 20
-        for p in self.home.team.bullpen:
-            if (p not in self.pitched) & (p.energy < 100):
-                p.energy += 20
-        for p in self.away.team.rotation:
-            if (p not in self.pitched) & (p.energy < 100):
-                p.energy += 20
-        for p in self.away.team.bullpen:
-            if (p not in self.pitched) & (p.energy < 100):
-                p.energy += 20
 
+        # calls endgame function for each team
+        self.home.endGame()
+        self.away.endGame()
 
 
 
@@ -349,9 +346,3 @@ class Game:
         self.balls = 0
         self.battingTeam.nextBatter()
         self.batter = self.battingTeam.batter
-        self.recordPitcher(self.pitcher)
-
-    def recordPitcher(self, pitch):
-
-        if pitch not in self.pitched:
-            self.pitched.append(pitch)
