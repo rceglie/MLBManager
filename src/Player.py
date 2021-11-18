@@ -35,19 +35,6 @@ class Player:
     cpbb = 0
     cphits = 0
 
-    # def __init__(self, f, l, a, p, h, bbnine, eye, fi, tm, sal, yrs):
-    #    self.fName = f
-    #    self.lName=l
-    #    self.age=a
-    #    self.position=int(p)
-    #    self.hit=int(h)
-    #    self.bbnine=int(bbnine)
-    #    self.eye = int(eye)
-    #    self.field=fi
-    #    self.team = tm
-    #    self.salary = sal
-    #    self.yearsLeft = yrs
-
     def __init__(self, list):
         self.fName = list[0]
         self.lName = list[1]
@@ -63,14 +50,13 @@ class Player:
         self.knine = int(list[11])
         self.stamina = int(list[12])
         self.energy = int(list[13])
-        self.battery = float(list[14])
-        self.team = list[15]
-        self.salary = list[16]
-        self.yearsLeft = list[17]
-
-    def getBattery(self):
-        self.battery = self.stamina * self.energy * self.energy / 100000
-        return self.battery
+        self.team = list[14]
+        self.salary = list[15]
+        self.yearsLeft = list[16]
+        if self.stamina > 74:
+            self.type = "starter"
+        else:
+            self.type = "reliever"
 
 
     def printShort(self):
@@ -85,7 +71,8 @@ class Player:
         print("K/9: \t\t", self.knine)
         print("Stamina: \t", self.stamina)
         print("Energy: \t", self.energy)
-        print("Battery: \t", self.battery)
+        if self.position == 1:
+            print("Type: \t", self.type)
         print("\n")
 
     def printFull(self):  # not updated
@@ -126,11 +113,22 @@ class Player:
         print("cPHits: \t", self.hits)
 
     def toString(self):
-        ret = self.fName + "," + self.lName + "," + str(self.age) + "," + str(self.position) + "," + str(self.hit)
-        ret = ret + "," + str(self.power) + "," + str(self.contact) + "," + str(self.eye) + "," + str(
-            self.speed) + "," + str(self.hnine) + ","
-        ret += str(self.bbnine) + "," + str(self.knine) + ","
-        ret = ret + str(self.stamina) + "," + str(self.energy) + "," + str(self.getBattery()) + ","
-        ret = ret + self.team + "," + str(self.salary) + "," + str(self.yearsLeft)
+        ret = self.fName + ","
+        ret = ret + self.lName + ","
+        ret = ret + str(self.age) + ","
+        ret = ret + str(self.position) + ","
+        ret = ret + str(self.hit) + ","
+        ret = ret + str(self.power) + ","
+        ret = ret + str(self.contact) + ","
+        ret = ret + str(self.eye) + ","
+        ret = ret + str(self.speed) + ","
+        ret = ret + str(self.hnine) + ","
+        ret = ret + str(self.bbnine) + ","
+        ret = ret + str(self.knine) + ","
+        ret = ret + str(self.stamina) + ","
+        ret = ret + str(self.energy) + ","
+        ret = ret + self.team + ","
+        ret = ret + str(self.salary) + ","
+        ret = ret + str(self.yearsLeft)
         ret = ret + "\n"
         return ret

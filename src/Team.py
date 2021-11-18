@@ -8,7 +8,6 @@ class Team:
         self.div = d
         self.roster = []
         self.hitters = []
-        self.pitchers = []
         self.wins = 0
         self.losses = 0
         self.positions = []
@@ -17,16 +16,22 @@ class Team:
             self.positions.append(blank)
         self.rotation = []
         self.spotInRotation = 0
+        self.bullpen = []
+
 
     def addPlayer(self, p):
         if p.position == 1:
-            self.pitchers.append(p)
             self.roster.append(p)
+            if p.type == "starter":
+                self.rotation.append(p)
+            else:
+                self.bullpen.append(p)
         else:
             self.hitters.append(p)
             self.roster.append(p)
         self.positions[int(p.position) - 1].append(p)
         p.team = self.name
+        self.updatePitchers()
 
     def addPlayers(self, p):
         for player in p:
@@ -47,18 +52,12 @@ class Team:
         self.wins = 0
         self.losses = 0
 
-    def updateBattery(self):
-        for p in self.pitchers:
-            p.getBattery()
-
-
     def updatePitchers(self):
-        self.updateBattery()
-        self.rotation = sorted(self.positions[0], key=lambda player: player.battery, reverse=True)
-        self.bullpen = sorted(self.positions[0], key=lambda player: player.battery, reverse=True)
+        self.rotation = sorted(self.rotation, key=lambda player: player.hnine, reverse=True)
+        self.bullpen = sorted(self.bullpen, key=lambda player: player.hnine, reverse=True)
 
     def getStarter(self):
-        self.updatePitchers()
+
         ret = self.rotation[self.spotInRotation]
         if self.spotInRotation == 4:
             self.spotInRotation = 0

@@ -9,8 +9,7 @@ import time
 
 def main():
     league = startup()
-    for t in league.allTeams:
-        pitchers = sorted(t.pitchers, key=lambda player: player.battery, reverse=True)
+
     #simulateGame(league, league.allTeams[3], league.allTeams[18])
     seasons = 1
     for i in range(seasons):
@@ -92,6 +91,12 @@ def simulateGame(le, a, b):
     # print(gt1.name + " vs " + gt2.name)
     game.pitcher = gt2.positions[0]
     game.batter = gt1.lineup[0]
+
+    if (gt1.name == "Red Sox"):
+        print(gt1.pitcher.lName)
+    if (gt2.name == "Red Sox"):
+        print(gt2.pitcher.lName)
+
     game.startGame()
     #return game.hScore + game.aScore
     #return game.hPC + game.aPC

@@ -4,7 +4,6 @@ class GameTeam:
         self.team = team
         self.lineup = []
         self.bench = []
-        self.starter = 0
         self.bullpen = []
         self.positions = []
         self.toBat = 0
@@ -31,7 +30,6 @@ class GameTeam:
         self.lineup[2] = temp  # swaps 1 and 3
         self.batter = self.lineup[0]
 
-        self.team.updatePitchers()
         self.pitcher = self.team.getStarter()
         self.lineup[8] = self.pitcher
 

@@ -18,12 +18,12 @@ def createHitters(num):
         construct.append(r.randint(1, 99))  # contact stat
         construct.append(r.randint(1, 99))  # eye stat
         construct.append(r.randint(1, 99))  # speed stat
-        construct.append(r.randint(1, 99))  # h/9 stat
-        construct.append(r.randint(1, 99))  # bb/9 stat
-        construct.append(r.randint(1, 99))  # k/9 stat
-        construct.append(r.randint(1, 99))  # stamina stat
-        construct.append(100)  # energy
-        construct.append(r.randint(1, 99))  # battery stat
+        construct.append(1)  # h/9 stat
+        construct.append(1)  # bb/9 stat
+        construct.append(1)  # k/9 stat
+        construct.append(1)  # stamina stat
+        construct.append(1)  # energy
+        construct.append(1)  # battery stat
         construct.append("FA")  # team
         construct.append(0)  # salary
         construct.append(0)  # yearsleft
@@ -32,6 +32,7 @@ def createHitters(num):
 
 
 def createPosition(num, pos):
+    # pos = 1 will create relievers, pos = 0 will create starters
     players = []
     for i in range(num):
         tempArr = createHPStat(pos)
@@ -39,7 +40,10 @@ def createPosition(num, pos):
         construct.append(names.get_first_name('male'))  # fName
         construct.append(names.get_last_name())  # lName
         construct.append(r.randint(20, 39))  # age
-        construct.append(pos)  # position
+        if pos == 0:
+            construct.append(1)  # position
+        else:
+            construct.append(pos)
         construct.append(tempArr[0])  # hit stat
         construct.append(r.randint(1, 99))  # power stat
         construct.append(r.randint(1, 99))  # contact stat
@@ -48,7 +52,12 @@ def createPosition(num, pos):
         construct.append(r.randint(1, 99))  # h/9 stat
         construct.append(r.randint(1, 99))  # bb/9 stat
         construct.append(r.randint(1, 99))  # k/9 stat
-        construct.append(r.randint(1, 99))  # stamina stat
+        if pos == 1:
+            construct.append(r.randint(1, 65))  # stamina stat
+        elif pos == 0:
+            construct.append(r.randint(75, 99))  # stamina stat
+        else:
+            construct.append(r.randint(1, 1))  # stamina stat
         construct.append(100)  # energy
         construct.append(r.randint(1, 99))  # battery stat
         construct.append("FA")  # team

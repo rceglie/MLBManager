@@ -295,7 +295,8 @@ class Game:
             # print("%s of %d\n--- Batting: %s\n--- Pitching: %s\n" % (toPrint, self.inning, self.battingTeam.name, self.pitchingTeam.name))
             while self.outs < 3:
                 if self.pitcher.energy < 2:
-                    self.pitcher = self.pitchingTeam.team.getStarter()
+                    balls = 1
+                    #self.pitcher = self.pitchingTeam.team.getStarter()
                 self.pitch()
             self.nextHalf()
 
@@ -310,16 +311,20 @@ class Game:
             self.winner = self.away
             self.loser = self.home
         # adds energy to everyone who didn't pitch
-        for p in self.home.team.pitchers:
+        for p in self.home.team.rotation:
             if (p not in self.pitched) & (p.energy < 100):
                 p.energy += 20
-        for p in self.away.team.pitchers:
+        for p in self.home.team.bullpen:
+            if (p not in self.pitched) & (p.energy < 100):
+                p.energy += 20
+        for p in self.away.team.rotation:
+            if (p not in self.pitched) & (p.energy < 100):
+                p.energy += 20
+        for p in self.away.team.bullpen:
             if (p not in self.pitched) & (p.energy < 100):
                 p.energy += 20
 
 
-        print(self.home.pitcher.printShort())
-        print(self.away.pitcher.printShort())
 
 
     def nextHalf(self):

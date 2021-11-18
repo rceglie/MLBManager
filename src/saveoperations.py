@@ -80,7 +80,8 @@ def firstload():
         temp.extend(createPosition(1, 8))
         temp.extend(createPosition(1, 9))  # 1 of each position (8)
         temp.extend(createHitters(5))  # 5 bench hitters
-        temp.extend(createPosition(13, 1))  # 13 pitchers
+        temp.extend(createPosition(5, 0))  # 5 starters
+        temp.extend(createPosition(8, 1))  # 8 relievers
 
         league.allTeams[i].addPlayers(temp)
         masterPlayerList.extend(temp)
