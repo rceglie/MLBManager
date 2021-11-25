@@ -5,16 +5,16 @@ import sys
 from PyQt6 import QtWidgets
 from PyQt6.QtWidgets import QApplication, QWidget, QPushButton, QMessageBox, QDialog, QStackedWidget
 from PyQt6.uic import loadUi
-from design.ui.main_window import Ui_MainWindow
 from src import saveoperations as so
-from design.ui import LoadingWindow as lw
+import time
 
 class LoadingWindow(QDialog):
 
     def __init__(self):
         super(LoadingWindow, self).__init__()
-        loadUi("LoadingWindow.ui", self)
+        loadUi(r'C:\Users\Robert\IdeaProjects\MLBManager\display\ui\LoadingWindow.ui', self)
         self.league = so.startup()
+        #time.sleep(5)
         self.gotoMainWindow()
 
     def gotoMainWindow(self):
@@ -26,7 +26,7 @@ class MainWindow(QDialog):
 
     def __init__(self):
         super(MainWindow, self).__init__()
-        loadUi("MainWindow.ui", self)
+        loadUi(r'C:\Users\Robert\IdeaProjects\MLBManager\display\ui\MainWindow.ui', self)
 
 
 
