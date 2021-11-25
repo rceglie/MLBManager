@@ -14,9 +14,7 @@ def main():
     #simulateGame(league, league.allTeams[3], league.allTeams[18])
     seasons = 0
     for i in range(seasons):
-        league.newSeason()
         simulateSeason(league)
-        league.sort()
     printSeasonStandings(league)
     #for i in range(seasons):
     #    simulateGame(league, league.allTeams[3], league.allTeams[18])
@@ -64,6 +62,7 @@ def printSeasonStandings(league):
 
 
 def simulateSeason(league):
+    league.newSeason()
     j = 0
     for day in league.schedule:
         i = 0
@@ -75,6 +74,7 @@ def simulateSeason(league):
             result = simulateGame(league, matchup[0], matchup[1])
             result[0].team.wins += 1
             result[1].team.losses += 1
+    league.sort()
 
 
 def simulateGame(le, a, b):
