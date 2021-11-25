@@ -1,4 +1,4 @@
-from schedulecreation import *
+from src.schedulecreation import *
 
 
 class League:

@@ -1,17 +1,18 @@
-from Player import *
-from createplayers import *
-from saveoperations import *
-from GameTeam import *
-from Game import *
-from schedulecreation import *
-import time
+from src.saveoperations import *
+from src.GameTeam import *
+from src.Game import *
+
+league = None
+
+def run():
+    return main()
 
 
 def main():
     league = startup()
 
     #simulateGame(league, league.allTeams[3], league.allTeams[18])
-    seasons = 1
+    seasons = 0
     for i in range(seasons):
         league.newSeason()
         simulateSeason(league)
@@ -19,6 +20,7 @@ def main():
     printSeasonStandings(league)
     #for i in range(seasons):
     #    simulateGame(league, league.allTeams[3], league.allTeams[18])
+    return league
 
 
 
@@ -95,6 +97,3 @@ def simulateGame(le, a, b):
     #return game.hPC + game.aPC
     return [game.winner, game.loser]
 
-
-if __name__ == "__main__":
-    main()

@@ -1,9 +1,8 @@
 import os
-from createplayers import *
-from League import *
-from Team import *
-from main import *
-import timeit
+from src.createplayers import *
+from src.League import *
+from src.Team import *
+from src.main import *
 
 
 def startup():

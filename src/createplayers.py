@@ -1,4 +1,4 @@
-from Player import *
+from src.Player import *
 import random as r
 import names
 
