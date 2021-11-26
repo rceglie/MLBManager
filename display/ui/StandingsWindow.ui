@@ -15,6 +15,13 @@
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_9">
    <item>
+    <widget class="QLabel" name="logo">
+     <property name="text">
+      <string>TextLabel</string>
+     </property>
+    </widget>
+   </item>
+   <item>
     <layout class="QHBoxLayout" name="horizontalLayout_31">
      <item>
       <layout class="QVBoxLayout" name="verticalLayout_4">
@@ -703,7 +710,7 @@
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout_32">
      <item>
-      <widget class="QPushButton" name="pushButton">
+      <widget class="QPushButton" name="btnSimAgain">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
          <horstretch>0</horstretch>

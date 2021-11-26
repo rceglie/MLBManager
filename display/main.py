@@ -26,6 +26,7 @@ class MainWindow(QDialog):
 class StandingsWindow(QDialog):
 
     def __init__(self, league):
+        self.league = league
         super(StandingsWindow, self).__init__()
         loadUi(r'C:\Users\Robert\IdeaProjects\MLBManager\display\ui\StandingsWindow.ui', self)
         simulateSeason(league)
@@ -40,9 +41,29 @@ class StandingsWindow(QDialog):
         self.label_8.setText(str(league.ALEast[2].wins))
         self.label_9.setText(str(league.ALEast[3].wins))
         self.label_10.setText(str(league.ALEast[4].wins))
+        self.div.setText(str(widget.count()))
 
+        self.btnSimAgain.clicked.connect(self.simulateAnotherSeason)
 
+    def simulateAnotherSeason(self):
+        x = 1
+        screen = StandingsWindow(self.league)
+        widget.addWidget(screen)
+        #currentIndex = widget.currentIndex
+        widget.removeWidget(widget.currentWidget())
 
+class LoadWindow(QDialog):
+
+    def __init__(self):
+        super(LoadWindow, self).__init__()
+        loadUi(r'C:\Users\Robert\IdeaProjects\MLBManager\display\ui\MainWindow.ui', self)
+        self.league = so.startup()
+
+    def simulateSeason(self):
+
+        screen = StandingsWindow(self.league)
+        widget.addWidget(screen)
+        widget.setCurrentIndex(widget.currentIndex()+1)
 
 
 
